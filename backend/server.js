@@ -19,6 +19,13 @@ app.post("/checkout", async (req, res) => {
     });
   });
 
+app.get('/order/success', async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+  const customer = await stripe.customers.retrieve(session.customer);
+
+
+});
+  
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
